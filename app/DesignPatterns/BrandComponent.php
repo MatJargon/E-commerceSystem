@@ -2,9 +2,17 @@
 
 namespace App\DesignPatterns;
 
-interface BrandComponent
+abstract class BrandComponent
 {
-    public function add(BrandComponent $component);
-    public function remove(BrandComponent $component);
-    public function display();
+    public function add(BrandComponent $component)
+    {
+        throw new \BadMethodCallException('cannot add to a brand');
+    }
+
+    public function remove(BrandComponent $component)
+    {
+        throw new \BadMethodCallException('cannot remove from a brand');
+    }
+
+    abstract public function display();
 }

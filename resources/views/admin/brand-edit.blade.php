@@ -4,7 +4,7 @@
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>category Information</h3>
+                <h3>Brand Information</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
@@ -13,34 +13,34 @@
                     </li>
                     <li><i class="icon-chevron-right"></i></li>
                     <li>
-                        <a href="{{ route('admin.category.add') }}">
-                            <div class="text-tiny">categorys</div>
+                        <a href="{{ route('admin.brands') }}">
+                            <div class="text-tiny">Brands</div>
                         </a>
                     </li>
                     <li><i class="icon-chevron-right"></i></li>
                     <li>
-                        <div class="text-tiny">Edit category</div>
+                        <div class="text-tiny">Edit Brand</div>
                     </li>
                 </ul>
             </div>
 
-            <!-- new-category -->
+            <!-- edit-brand -->
             <div class="wg-box">
-                <form class="form-new-product form-style-1" action="{{ route('admin.category.update') }}" method="POST"
+                <form class="form-new-product form-style-1" action="{{ route('admin.brand.update') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="id" value={{ $category->id }} />
+                    <input type="hidden" name="id" value={{ $brand->id }}>
                     <fieldset class="name">
-                        <div class="body-title">category Name <span class="tf-color-1">*</span></div>
-                        <input class="flex-grow" type="text" placeholder="category name" name="name" value="{{$category->name}}"
+                        <div class="body-title">Brand Name <span class="tf-color-1">*</span></div>
+                        <input class="flex-grow" type="text" placeholder="Brand name" name="name" value="{{$brand->name}}"
                             required>
                     </fieldset>
                     @error('name')<span class="alert-danger">{{ $message }}</span>@enderror
 
                     <fieldset class="name">
-                        <div class="body-title">category Slug <span class="tf-color-1">*</span></div>
-                        <input class="flex-grow" type="text" placeholder="category Slug" name="slug" value="{{$category->slug}}"
+                        <div class="body-title">Brand Slug <span class="tf-color-1">*</span></div>
+                        <input class="flex-grow" type="text" placeholder="Brand Slug" name="slug" value="{{$brand->slug}}"
                             required readonly>
                     </fieldset>
                     @error('slug')<span class="alert-danger">{{ $message }}</span>@enderror
@@ -49,9 +49,9 @@
                     <fieldset>
                         <div class="body-title">Upload Image <span class="tf-color-1">*</span></div>
                         <input id="myFile" type="file" name="image">
-                        <div id="imgprevious" style="{{ $category->image ? '' : 'display:none;' }}">
-                            @if($category->image)
-                                <img src="{{ asset('uploads/categories/' . $category->image) }}" alt="Preview"
+                        <div id="imgprevious" style="{{ $brand->image ? '' : 'display:none;' }}">
+                            @if($brand->image)
+                                <img src="{{ asset('uploads/brands/' . $brand->image) }}" alt="Preview"
                                     style="max-width:150px;">
                             @else
                                 <img src="" alt="Preview" style="max-width:150px;">

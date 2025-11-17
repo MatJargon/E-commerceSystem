@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th style="width:70px">OrderNo</th>
-                                <th class="text-center">Name</th>
+                                <th class="text-center">Namessss</th>
                                 <th class="text-center">Phone</th>
                                 <th class="text-center">Subtotal</th>
                                 <th class="text-center">Tax</th>
@@ -80,6 +80,45 @@
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
                 {{$orders->links('pagination::bootstrap-5')}}
+            </div>
+        </div>
+
+        <!-- User Order Statistics Table -->
+        <div class="wg-box mt-4">
+            <div class="flex items-center justify-between">
+                <h4 class="text-title-medium">Total Orders by User</h4>
+            </div>
+            <div class="wg-table table-all-user">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Customer Name</th>
+                                <th class="text-center">Phone Number</th>
+                                <th class="text-center">Total Orders</th>
+                                <th class="text-center">Total Items Purchased</th>
+                                <th class="text-center">Total Amount Spent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($userOrderStats as $userStat)
+                            <tr>
+                                <td class="text-center">{{ $userStat->name }}</td>
+                                <td class="text-center">{{ $userStat->phone }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary">{{ $userStat->total_orders }}</span>
+                                </td>
+                                <td class="text-center">{{ number_format($userStat->total_items) }}</td>
+                                <td class="text-center">${{ number_format($userStat->total_amount, 2) }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No order statistics available</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

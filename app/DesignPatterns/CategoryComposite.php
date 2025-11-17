@@ -11,6 +11,13 @@ class CategoryComposite extends CategoryComponent
         $this->categories[] = $category;
     }
 
+    public function remove(CategoryComponent $category)
+    {
+        $this->categories = array_filter($this->categories, function($child) use ($category) {
+            return $child !== $category;
+        });
+    }
+
     public function display()
     {
         $results = [];

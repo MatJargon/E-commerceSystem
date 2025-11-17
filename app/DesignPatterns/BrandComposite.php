@@ -2,7 +2,7 @@
 
 namespace App\DesignPatterns;
 
-class BrandComposite implements BrandComponent
+class BrandComposite extends BrandComponent
 {
     private $children = [];
 

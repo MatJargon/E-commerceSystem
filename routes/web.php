@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
 use App\Http\Middleware\AuthAdmin;
+use App\Notifications\WelcomeEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -82,4 +83,17 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
     Route::get('/admin/payments',[AdminController::class,'payments'])->name('admin.payments');
 
+});
+
+// test-email
+Route::get('/test-email', function () {
+    try {
+        \Mail::raw('Hi, Thank You for registering', function($message) {
+            $message->to('yanhangaoa88@gmail.com')
+                    ->subject('Test Email');
+        });
+        return 'Email sent successfully!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
 });

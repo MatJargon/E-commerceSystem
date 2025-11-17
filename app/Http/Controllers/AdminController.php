@@ -79,7 +79,21 @@ class AdminController extends Controller
     public function orders()
     {
         $orders = Order::orderBy('created_at', 'ASC')->paginate(12);
-        return view('admin.orders', compact('orders'));
+        
+        // Calculate total order items by each user
+        $userOrderStats = DB::table('orders')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->select('orders.name', 'orders.phone')
+            ->selectRaw('
+                COUNT(DISTINCT orders.id) as total_orders,
+                SUM(order_items.quantity) as total_items,
+                SUM(orders.total) as total_amount
+            ')
+            ->groupBy('orders.name', 'orders.phone')
+            ->orderBy('total_items', 'DESC')
+            ->get();
+        
+        return view('admin.orders', compact('orders', 'userOrderStats'));
     }
 
     public function order_details($order_id)
